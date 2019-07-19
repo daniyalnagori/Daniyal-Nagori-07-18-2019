@@ -9,9 +9,27 @@
   <div class="content">
     <div class="card main-card">
       <h5 class="card-header">
-        <form class="search-bar">
+          <div class="ng-autocomplete">
+              <ng-autocomplete 
+                [data]="autoCompleteData"
+                [searchKeyword]="keyword"
+                (selected)='selectEvent($event)'
+                (inputChanged)='onChangeSearch($event)'
+                [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate">                                 
+              </ng-autocomplete>
+               
+              <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.name"></a>
+              </ng-template>
+               
+              <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+              </ng-template>
+          </div>
+        <!-- <form class="search-bar">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        </form>
+        </form> -->
       </h5>
       <div class="card-body">
         <div class="borders row-1">
@@ -31,31 +49,31 @@
           <h1>Scattered Clouds</h1>
         </div>
         <div class="borders row-3">
-            <div class="card whether-card">
+            <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
                 </div>
             </div>
-            <div class="card whether-card">
+            <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
                 </div>
             </div>
-            <div class="card whether-card">
+            <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
                 </div>
             </div>
-            <div class="card whether-card">
+            <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
                 </div>
             </div>
-            <div class="card whether-card">
+            <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
