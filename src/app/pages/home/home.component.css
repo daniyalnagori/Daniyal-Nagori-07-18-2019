@@ -3,10 +3,6 @@
     padding-left: 0;
 }
 
-.btn-primary {
-    margin-left: 10px;
-}
-
 .content {
     display: flex;
     flex-direction: row;

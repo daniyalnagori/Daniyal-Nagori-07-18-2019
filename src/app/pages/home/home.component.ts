@@ -7,15 +7,18 @@ import { WhetherService } from 'src/app/services/whether.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   keyword = 'name';
   autoCompleteData = [];
-  currentLocationData = [];
-
-  constructor(private whetherService : WhetherService) { }
+  selectedLocation : {key: number; name: string};
+  selectedLocationData = [];
+  
+  
+  constructor(private whetherService : WhetherService) { 
+    let favoriteLocations = []
+    localStorage.setItem('favouriteLocations', JSON.stringify(favoriteLocations));
+  }
 
   ngOnInit() {
-
   }
 
   onChangeSearch(value: string) {
@@ -30,19 +33,32 @@ export class HomeComponent implements OnInit {
   }
 
   selectEvent(item) {
-    this.whetherService.getCurrentWhether(item.key).subscribe(res => {
-      console.log(res)
-      this.currentLocationData = res.map((weather) => {
-        return {
-          name: item.name,
-          temp: weather.Temperature,
-          whetherText: weather.WeatherText,
-          favoruite: false
-        }
-      })
-      console.log(this.currentLocationData)
-    })
+    this.selectedLocation = item;
+    // this.whetherService.getCurrentWhether(item.key).subscribe(res => {
+    //   this.selectedLocation = item;
+    //   this.selectedLocationData = res.map((weather) => {
+    //     return {
+    //       name: item.name,
+    //       temp: weather.Temperature,
+    //       whetherText: weather.WeatherText,
+    //     }
+    //   })
+    //   console.log(this.selectedLocationData)
+    // })
     console.log(item);
   }
 
+  addToFavorite() {
+    let previousLocations = JSON.parse(localStorage.getItem('favouriteLocations'))
+    if(this.selectedLocation != null) {
+      previousLocations.filter(res => res.name === this.selectedLocation.name).length > 0 ? 
+        alert('Item alrady selected') : previousLocations.push(this.selectedLocation);
+      localStorage.setItem('favouriteLocations', JSON.stringify(previousLocations));
+      this.selectedLocation = null;
+      console.log(JSON.parse(localStorage.getItem('favouriteLocations')))
+    }
+    else {
+      alert('location not selected');
+    }
+  }
 }

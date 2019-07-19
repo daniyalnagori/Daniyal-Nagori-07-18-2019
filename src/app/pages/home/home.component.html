@@ -1,11 +1,12 @@
 <div class="container-fluid">
-  <nav class="navbar navbar-light bg-light">
+  <app-navbar></app-navbar>
+  <!-- <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand">The Whether App</a>
     <div>
       <button class="btn btn-primary">Home</button>
       <button class="btn btn-primary">Favorites</button>
     </div>
-  </nav>
+  </nav> -->
   <div class="content">
     <div class="card main-card">
       <h5 class="card-header">
@@ -41,7 +42,7 @@
               </div>
               <div class="card" style="width: 18rem;">
                   <div class="card-body">
-                      <button type="button" class="btn btn-danger">Add to Favorites</button>
+                      <button type="button" class="btn btn-danger" (click)="addToFavorite()">Add to Favorites</button>
                   </div>
                 </div>
         </div>
