@@ -1,90 +1,53 @@
 <div class="container-fluid">
   <app-navbar></app-navbar>
-  <!-- <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand">The Whether App</a>
-    <div>
-      <button class="btn btn-primary">Home</button>
-      <button class="btn btn-primary">Favorites</button>
-    </div>
-  </nav> -->
   <div class="content">
     <div class="card main-card">
       <h5 class="card-header">
-          <div class="ng-autocomplete">
-              <ng-autocomplete 
-                [data]="autoCompleteData"
-                [searchKeyword]="keyword"
-                (selected)='selectEvent($event)'
-                (inputChanged)='onChangeSearch($event)'
-                [itemTemplate]="itemTemplate"
-                [notFoundTemplate]="notFoundTemplate">                                 
-              </ng-autocomplete>
-               
-              <ng-template #itemTemplate let-item>
-              <a [innerHTML]="item.name"></a>
-              </ng-template>
-               
-              <ng-template #notFoundTemplate let-notFound>
-              <div [innerHTML]="notFound"></div>
-              </ng-template>
-          </div>
-        <!-- <form class="search-bar">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        </form> -->
+        <div class="ng-autocomplete">
+          <ng-autocomplete [data]="autoCompleteData" [searchKeyword]="keyword" (selected)='selectEvent($event)'
+            (inputChanged)='onChangeSearch($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
       </h5>
-      <div class="card-body">
-        <div class="borders row-1">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                </div>
+      <div class="card-body" *ngIf="selectedLocationData.length > 0">
+        <div class="row">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ selectedLocationData[0].name }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ selectedLocationData[0].temp.Metric.Value }} C</h6>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body card-body-favourite">
+              <div>
+                  <i class="far fa-heart fa-3x" *ngIf="!favourite"></i>
+                  <i class="fas fa-heart fa-3x" *ngIf="favourite"></i>
               </div>
-              <div class="card" style="width: 18rem;">
-                  <div class="card-body">
-                      <button type="button" class="btn btn-danger" (click)="addToFavorite()">Add to Favorites</button>
-                  </div>
-                </div>
+              <button type="button" class="btn btn-danger" (click)="addToFavorite()" *ngIf="!favourite">Add to Favorites</button>
+              <button type="button" class="btn btn-danger" (click)="addToFavorite()" *ngIf="favourite">Remove from Favorites</button>
+            </div>
+          </div>
         </div>
-        <div class="borders row-2">
-          <h1>Scattered Clouds</h1>
+        <div class="row row-whetherText">
+          <h1>{{ selectedLocationData[0].whetherText }}</h1>
         </div>
-        <div class="borders row-3">
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                </div>
+        <div class="row">
+          <div class="card bg-light mb-3" *ngFor="let item of fiveDayForecastData" style="width: 10rem;">
+            <div class="card-body card-body-forecast ">
+              <h5 class="card-title">{{ getDay(item.Date) }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ item.Temperature.Maximum.Value }} C</h6>
             </div>
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                </div>
-            </div>          
-        <div>
-        <!-- <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          </div>
+          <div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
