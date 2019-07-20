@@ -5,7 +5,7 @@
       <h5 class="card-header">
         <div class="ng-autocomplete">
           <ng-autocomplete [data]="autoCompleteData" [searchKeyword]="keyword" (selected)='selectEvent($event)'
-            (inputChanged)='onChangeSearch($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+            (inputChanged)='onChangeSearch($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate" [placeHolder]="'Enter City'">
           </ng-autocomplete>
 
           <ng-template #itemTemplate let-item>
@@ -19,13 +19,13 @@
       </h5>
       <div class="card-body" *ngIf="selectedLocationData.length > 0">
         <div class="row">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
+          <div class="card bg-light mb-3 currentWeatherCard ">
+            <div class="card-body row-1-card-1-body">
               <h5 class="card-title">{{ selectedLocationData[0].name }}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{ selectedLocationData[0].temp.Metric.Value }} C</h6>
             </div>
           </div>
-          <div class="card" style="width: 18rem;">
+          <div class="card currentWeatherCard ">
             <div class="card-body card-body-favourite">
               <div>
                   <i class="far fa-heart fa-3x" *ngIf="!favourite"></i>
@@ -40,7 +40,7 @@
           <h1>{{ selectedLocationData[0].whetherText }}</h1>
         </div>
         <div class="row">
-          <div class="card bg-light mb-3" *ngFor="let item of fiveDayForecastData" style="width: 10rem;">
+          <div class="card bg-light mb-3 card-5-days" *ngFor="let item of fiveDayForecastData">
             <div class="card-body card-body-forecast ">
               <h5 class="card-title">{{ getDay(item.Date) }}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{ item.Temperature.Maximum.Value }} C</h6>

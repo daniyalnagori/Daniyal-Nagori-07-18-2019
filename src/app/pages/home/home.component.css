@@ -52,3 +52,17 @@
     display: flex;
     justify-content: space-around;
 }
+
+.row-1-card-1-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-5-days {
+  width: 10rem;
+}
+
+.currentWeatherCard {
+  width: 18rem;
+}

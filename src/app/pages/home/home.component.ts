@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { WhetherService } from 'src/app/services/whether.service';
 import { ActivatedRoute } from '@angular/router';
 
