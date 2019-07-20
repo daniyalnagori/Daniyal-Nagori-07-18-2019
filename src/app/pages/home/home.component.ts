@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { WhetherService } from 'src/app/services/whether.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +8,19 @@ import { WhetherService } from 'src/app/services/whether.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  keyword = 'name';
-  autoCompleteData = [];
-  selectedLocation : {key: number; name: string} = { key: 215854, name: 'Tel Aviv' };
-  selectedLocationData = [];
-  fiveDayForecastData = [];
-  favourite: boolean;
-  
-  constructor(private whetherService : WhetherService) { 
+  keyword = 'name';  // For Autocomplete Module
+  autoCompleteData = []; // Data coming from API
+  selectedLocation: { key: number; name: string } = { key: 215854, name: 'Tel Aviv' }; // Current Selected Location
+  selectedLocationData = []; // Whether Data of Current Selected Location
+  fiveDayForecastData = [];  // Five Days forecast of Curent Selected Location
+  favourite: boolean;   // For saving favourite status
+
+  constructor(private whetherService: WhetherService, private route: ActivatedRoute, ) {
+    const name = this.route.snapshot.paramMap.get('name');
+    const key = +this.route.snapshot.paramMap.get('id');
+    if (name != null && key != null) {
+      this.selectedLocation = { key, name }
+    }
     this.selectEvent(this.selectedLocation);
   }
 
@@ -22,7 +28,7 @@ export class HomeComponent {
     this.whetherService.search(value).subscribe(res => {
       this.autoCompleteData = res.map((item) => {
         return {
-          key : item.Key,
+          key: item.Key,
           name: item.LocalizedName
         }
       })
@@ -46,22 +52,21 @@ export class HomeComponent {
   }
 
   addToFavorite() {
-    if(localStorage.getItem('favouriteLocations') === null) {
+    if (localStorage.getItem('favouriteLocations') === null) {
       let favoriteLocations = []
       favoriteLocations.push(this.selectedLocation)
       localStorage.setItem('favouriteLocations', JSON.stringify(favoriteLocations));
       this.checkFavorite();
     } else {
       let previousLocations = JSON.parse(localStorage.getItem('favouriteLocations'))
-      previousLocations.filter(res => res.name === this.selectedLocation.name).length > 0 ? 
-        alert('Item alrady selected') : previousLocations.push(this.selectedLocation);
+      previousLocations.push(this.selectedLocation);
       localStorage.setItem('favouriteLocations', JSON.stringify(previousLocations));
       this.checkFavorite();
     }
   }
 
-  removefromFavourites(){
-    if(localStorage.getItem('favouriteLocations') != null) {
+  removefromFavourites() {
+    if (localStorage.getItem('favouriteLocations') != null) {
       let favoriteLocations = JSON.parse(localStorage.getItem('favouriteLocations'))
       let newLocations = favoriteLocations.filter(res => res.name != this.selectedLocation.name);
       localStorage.setItem('favouriteLocations', JSON.stringify(newLocations));
@@ -72,7 +77,6 @@ export class HomeComponent {
   fiveDaysForecast(item) {
     this.whetherService.get5DayForecast(item.key).subscribe(res => {
       this.fiveDayForecastData = res['DailyForecasts']
-      console.log(this.fiveDayForecastData);
     })
   }
 
@@ -83,10 +87,10 @@ export class HomeComponent {
   }
 
   checkFavorite() {
-    if(localStorage.getItem('favouriteLocations') != null) {
+    if (localStorage.getItem('favouriteLocations') != null) {
       let favoriteLocations = JSON.parse(localStorage.getItem('favouriteLocations'))
-      this.favourite = favoriteLocations.filter(res => res.name === this.selectedLocation.name).length > 0 ? 
-        true: false;
+      this.favourite = favoriteLocations.filter(res => res.name === this.selectedLocation.name).length > 0 ?
+        true : false;
     }
   }
 }

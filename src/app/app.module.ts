@@ -25,6 +25,7 @@ import { WeatherCardComponent } from './components/weather-card/weather-card.com
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: 'home', component: HomeComponent },
+      { path: 'home/:name/:id', component: HomeComponent },
       { path: 'favorites', component: FavoritesComponent }
     ])
   ],

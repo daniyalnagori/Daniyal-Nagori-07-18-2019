@@ -1,4 +1,4 @@
-<a href="#" class="card bg-light mb-3 card-link" *ngIf="weatherData.length > 0">
+<a routerLink="/home/{{name}}/{{locationKey}}" class="card bg-light mb-3 card-link" *ngIf="weatherData.length > 0">
   <div class="card-header">{{ name }}</div>
   <div class="card-body">
     <h5 class="card-title">{{ weatherData[0].Temperature.Metric.Value }} C</h5>
