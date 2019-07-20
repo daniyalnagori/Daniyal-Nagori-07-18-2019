@@ -1,3 +1,9 @@
 .btn-primary {
     margin-left: 10px;
 }
+
+@media only screen and (max-width: 369px) {
+    .navbar {
+      justify-content: center;
+    }
+  }

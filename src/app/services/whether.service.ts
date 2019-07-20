@@ -6,9 +6,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class WhetherService {
-  urlLocations: string = 'http://dataservice.accuweather.com/locations/v1/cities/autocomplete'
-  urlCurrentCondition: string = 'http://dataservice.accuweather.com/currentconditions/v1'
-  url5DayForecast: string = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/'
+  urlLocations: string = 'https://dataservice.accuweather.com/locations/v1/cities/autocomplete'
+  urlCurrentCondition: string = 'https://dataservice.accuweather.com/currentconditions/v1'
+  url5DayForecast: string = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/'
   apiKey: string = 'kxTOlJKmtuoQ1myMTxpKECq1GYA6sUdM&q'
 
   constructor(private http: Http) { }
