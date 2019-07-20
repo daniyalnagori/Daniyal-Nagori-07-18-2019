@@ -51,14 +51,21 @@ export class HomeComponent {
       favoriteLocations.push(this.selectedLocation)
       localStorage.setItem('favouriteLocations', JSON.stringify(favoriteLocations));
       this.checkFavorite();
-      this.selectedLocation = null;
     } else {
       let previousLocations = JSON.parse(localStorage.getItem('favouriteLocations'))
       previousLocations.filter(res => res.name === this.selectedLocation.name).length > 0 ? 
         alert('Item alrady selected') : previousLocations.push(this.selectedLocation);
       localStorage.setItem('favouriteLocations', JSON.stringify(previousLocations));
       this.checkFavorite();
-      this.selectedLocation = null;
+    }
+  }
+
+  removefromFavourites(){
+    if(localStorage.getItem('favouriteLocations') != null) {
+      let favoriteLocations = JSON.parse(localStorage.getItem('favouriteLocations'))
+      let newLocations = favoriteLocations.filter(res => res.name != this.selectedLocation.name);
+      localStorage.setItem('favouriteLocations', JSON.stringify(newLocations));
+      this.checkFavorite();
     }
   }
 
@@ -76,11 +83,10 @@ export class HomeComponent {
   }
 
   checkFavorite() {
-    let previousLocations = JSON.parse(localStorage.getItem('favouriteLocations'))
-    if(this.selectedLocation != null) {
-      this.favourite = previousLocations.filter(res => res.name === this.selectedLocation.name).length > 0 ? 
+    if(localStorage.getItem('favouriteLocations') != null) {
+      let favoriteLocations = JSON.parse(localStorage.getItem('favouriteLocations'))
+      this.favourite = favoriteLocations.filter(res => res.name === this.selectedLocation.name).length > 0 ? 
         true: false;
-        console.log(this.favourite)
     }
   }
 }

@@ -10,7 +10,7 @@ export class WhetherService {
   urlCurrentCondition : string = 'http://dataservice.accuweather.com/currentconditions/v1'
   url5DayForecast : string = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/'
   apiKey : string = 'kxTOlJKmtuoQ1myMTxpKECq1GYA6sUdM&q'
-  apikey2 : string = 'OwCiWquM19JQzDKvsH8uE4CmJE924Ah5'
+  apikey2 : string = 'O7Wi8ODZGSi2XVA7sMQOxXpJ5Cf7beRZ'
 
   constructor(private http: Http) { }
 
