@@ -7,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoritesComponent implements OnInit {
 
-  constructor() { }
+  favouriteLocations = [];
 
+  constructor() {
+    this.favouriteLocations = JSON.parse(localStorage.getItem('favouriteLocations'));
+  }
   ngOnInit() {
   }
 

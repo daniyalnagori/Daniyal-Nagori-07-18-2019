@@ -1,0 +1,13 @@
+a{
+    color: #383d41;
+}
+
+.card { 
+    max-width: 18rem;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

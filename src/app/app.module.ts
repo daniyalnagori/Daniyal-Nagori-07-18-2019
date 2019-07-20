@@ -7,14 +7,16 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { AppComponent } from './pages/app.component'
+import { AppComponent } from './pages/app.component';
+import { WeatherCardComponent } from './components/weather-card/weather-card.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FavoritesComponent,
-    NavbarComponent
+    NavbarComponent,
+    WeatherCardComponent
   ],
   imports: [
     BrowserModule,

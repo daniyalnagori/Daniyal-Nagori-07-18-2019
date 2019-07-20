@@ -1,1 +1,7 @@
 <app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <app-weather-card *ngFor="let location of favouriteLocations" [locationKey]="location.key" [name]="location.name">
+    </app-weather-card>
+  </div>
+</div>
